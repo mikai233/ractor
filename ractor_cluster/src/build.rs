@@ -6,13 +6,16 @@
 //! This is the pre-compilation build script for the crate `ractor` when running in distributed
 //! mode. It's used to compile protobuf into Rust code prior to compilation.
 
+use protoc_bin_vendored::protoc_bin_path;
+
 /// The shared-path for all protobuf specifications
 const PROTOBUF_BASE_DIRECTORY: &str = "src/protocol";
 /// The list of protobuf files to generate inside PROBUF_BASE_DIRECTORY
 const PROTOBUF_FILES: [&str; 4] = ["meta", "node", "auth", "control"];
 
 fn build_protobufs() {
-    std::env::set_var("PROTOC", protobuf_src::protoc());
+    let protoc_path = protoc_bin_path().expect("unable to get protoc bin path");
+    std::env::set_var("PROTOC", protoc_path);
 
     let mut protobuf_files = Vec::with_capacity(PROTOBUF_FILES.len());
 

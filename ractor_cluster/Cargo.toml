@@ -14,7 +14,7 @@ categories = ["actor", "erlang"]
 build = "src/build.rs"
 
 [build-dependencies]
-protobuf-src = "1"
+protoc-bin-vendored = "3.0.0"
 prost-build = { version = "0.11" }
 
 [dependencies]
